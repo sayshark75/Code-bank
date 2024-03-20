@@ -60,6 +60,13 @@ export const theme = extendTheme({
       lineHeight: ["64px", "72px", "84px", "96px", "104px"],
       letterSpacing: "1.5px",
     },
+    "heading-h1-md": {
+      fontSize: ["28px", "32px", "48px", "56px", "64px"],
+      fontWeight: "600",
+      fontFamily: "poppins",
+      lineHeight: ["42px", "58px", "64px", "72px", "84px"],
+      letterSpacing: "1.5px",
+    },
     "p-lg": {
       fontSize: "18px",
       fontWeight: 600,

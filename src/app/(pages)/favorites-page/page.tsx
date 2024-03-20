@@ -1,31 +1,29 @@
 "use client";
 import { RequestSnippetType, SnippetDataType } from "@/TYPES";
-import { getData } from "@/api/api";
+import { getFavoritesData } from "@/api/api";
 import CodeHighlighter from "@/components/CodeHighlighter/CodeHighlighter";
+import CustomEmpty from "@/components/CustomePrompts/CustomEmpty";
 import CustomError from "@/components/CustomePrompts/CustomError";
 import CustomLoader from "@/components/CustomePrompts/CustomLoader";
-import CustomNotFound from "@/components/CustomePrompts/CustomNotFound";
+import TopBar from "@/components/FavoritesComponents/TopBar";
 import Navigation from "@/components/Navigation/Navigation";
-import SearchBar from "@/components/SearchBar/SearchBar";
-import useDebouncer from "@/hooks/useDebounce";
-import { Flex, useToast } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { Flex } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import Cookies from "universal-cookie";
 
-const SnippetsPage = () => {
+const FavoritesPage = () => {
+  const cookie = new Cookies(null, { path: "/" });
+  const navigation = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
 
   const [data, setData] = useState<SnippetDataType[]>([]);
-  const [searchQuery, setSearchQuery] = useState("");
 
-  const handleSearchChange = useDebouncer(async (query: string) => {
-    getSnippetData(query);
-  }, 500);
-
-  const getSnippetData = async (query: string) => {
+  const getFavoriteData = async () => {
     try {
       setLoading(true);
-      const resData: RequestSnippetType = await getData(query);
+      const resData: RequestSnippetType = await getFavoritesData();
       if (resData.status) {
         setData(resData.snippets);
         setLoading(false);
@@ -37,8 +35,13 @@ const SnippetsPage = () => {
       console.log("error: ", error);
     }
   };
+
   useEffect(() => {
-    getSnippetData(searchQuery);
+    if (!cookie.get("refreshToken")) {
+      navigation.replace("/login");
+      return;
+    }
+    getFavoriteData();
   }, []);
 
   if (loading) {
@@ -61,18 +64,12 @@ const SnippetsPage = () => {
     >
       <Navigation />
       <Flex w={"100%"} direction={"column"} pt={["56px", "64px"]}>
-        <SearchBar
-          value={searchQuery}
-          onChange={(event) => {
-            setSearchQuery(event.target.value);
-            handleSearchChange(event.target.value);
-          }}
-        />
-        {data.length === 0 && searchQuery !== "" ? (
-          <CustomNotFound />
+        <TopBar />
+        {data.length === 0 ? (
+          <CustomEmpty />
         ) : (
           data?.map((snippet, index) => {
-            return <CodeHighlighter key={`snippet-key-${index}`} {...snippet} />;
+            return <CodeHighlighter key={`snippet-key-${index}`} {...snippet} isFavorite={true} getFavoriteData={getFavoriteData} />;
           })
         )}
       </Flex>
@@ -80,4 +77,4 @@ const SnippetsPage = () => {
   );
 };
 
-export default SnippetsPage;
+export default FavoritesPage;

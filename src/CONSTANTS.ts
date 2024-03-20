@@ -1,6 +1,6 @@
+import { BsHeartFill } from "react-icons/bs";
 import { SideBarTabTypes } from "./TYPES";
 import { FaPager } from "react-icons/fa6";
-// import { TbFishHook } from "react-icons/tb";
 
 export const sidebarTabs: SideBarTabTypes[] = [
   {
@@ -8,9 +8,9 @@ export const sidebarTabs: SideBarTabTypes[] = [
     link: "/snippets-page",
     IconName: FaPager,
   },
-  // {
-  //   title: "Custom Hooks",
-  //   link: "/custom-hooks",
-  //   IconName: TbFishHook,
-  // },
+  {
+    title: "Favorites",
+    link: "/favorites-page",
+    IconName: BsHeartFill,
+  },
 ];

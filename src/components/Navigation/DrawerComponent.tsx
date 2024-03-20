@@ -3,19 +3,23 @@ import { Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, Dra
 import React from "react";
 import TabLink from "./TabLink";
 import { Link } from "@chakra-ui/next-js";
+import LoginButton from "../AuthComponents/LoginButton";
 
 const DrawerComponent = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   return (
     <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
       <DrawerOverlay />
-      <DrawerContent>
+      <DrawerContent bgColor={"light.100"}>
         <DrawerCloseButton border={"1px solid"} borderColor={"light.300"} />
-        <DrawerHeader py={"8px"}>
-          <Link href={"/"}>
-            <Text textStyle={"p-lg"} textAlign={"left"} ml={3} color={"dark.200"}>
-              Code Bank
-            </Text>
-          </Link>
+        <DrawerHeader py={"8px"} borderBottom={"1px solid"} borderBottomColor={"light.300"}>
+          <Flex gap={2} justifyContent={"flex-start"} alignItems={"center"}>
+            <Link href={"/"} _hover={{}}>
+              <Text textStyle={"p-lg"} textAlign={"left"} ml={3} color={"dark.200"} mr={12}>
+                Code Bank
+              </Text>
+            </Link>
+            <LoginButton type="mobile" />
+          </Flex>
         </DrawerHeader>
 
         <DrawerBody>

@@ -16,6 +16,7 @@ export interface WindowSize {
 }
 
 export type SnippetDataType = {
+  _id: string;
   code: string;
   title: string;
   tags?: string[];
@@ -23,12 +24,17 @@ export type SnippetDataType = {
   language?: string | undefined;
   delete?: boolean;
   description?: string;
+  isFavorite?: boolean;
+  getFavoriteData?: () => void;
 };
 
 export interface CodeHighlighterProps {
+  _id: string;
   language?: string;
   code: string;
   title: string;
+  isFavorite?: boolean;
+  getFavoriteData?: () => void;
 }
 
 export type SearchBarType = {
@@ -38,134 +44,4 @@ export type SearchBarType = {
 
 export type RequestSnippetType = { message: string; snippets: SnippetDataType[]; status: boolean };
 
-// | "abap"
-//     | "abnf"
-//     | "actionscript"
-//     | "ada"
-//     | "agda"
-//     | "al"
-//     | "antlr4"
-//     | "apacheconf"
-//     | "applescript"
-//     | "arduino"
-//     | "asciidoc"
-//     | "asm"
-//     | "aspnet"
-//     | "autohotkey"
-//     | "bash"
-//     | "basic"
-//     | "batch"
-//     | "bbcode"
-//     | "c"
-//     | "c++"
-//     | "c#"
-//     | "coffeescript"
-//     | "cpp"
-//     | "crystal"
-//     | "css"
-//     | "d"
-//     | "dart"
-//     | "diff"
-//     | "docker"
-//     | "ejs"
-//     | "elixir"
-//     | "elm"
-//     | "erb"
-//     | "erlang"
-//     | "forth"
-//     | "fsharp"
-//     | "fortran"
-//     | "fs"
-//     | "ftl"
-//     | "gfm"
-//     | "gherkin"
-//     | "git"
-//     | "glsl"
-//     | "go"
-//     | "graphql"
-//     | "groovy"
-//     | "haml"
-//     | "handlebars"
-//     | "haskell"
-//     | "haxe"
-//     | "html"
-//     | "http"
-//     | "hyphy"
-//     | "icon"
-//     | "inform7"
-//     | "ini"
-//     | "ink"
-//     | "io"
-//     | "jcl"
-//     | "javascript"
-//     | "json"
-//     | "jsp"
-//     | "jsx"
-//     | "julia"
-//     | "kotlin"
-//     | "latex"
-//     | "less"
-//     | "liquid"
-//     | "lisp"
-//     | "livescript"
-//     | "llvm"
-//     | "log"
-//     | "lua"
-//     | "makefile"
-//     | "markdown"
-//     | "markup"
-//     | "matlab"
-//     | "mel"
-//     | "nginx"
-//     | "nim"
-//     | "nix"
-//     | "nsis"
-//     | "objectivec"
-//     | "ocaml"
-//     | "opencl"
-//     | "oz"
-//     | "parigp"
-//     | "pascal"
-//     | "pawn"
-//     | "perl"
-//     | "php"
-//     | "php-extras"
-//     | "powershell"
-//     | "processing"
-//     | "prolog"
-//     | "properties"
-//     | "pug"
-//     | "puppet"
-//     | "python"
-//     | "q"
-//     | "qml"
-//     | "r"
-//     | "razor"
-//     | "redis"
-//     | "rest"
-//     | "robot"
-//     | "ruby"
-//     | "rust"
-//     | "sas"
-//     | "sass"
-//     | "scala"
-//     | "scheme"
-//     | "scss"
-//     | "shaders"
-//     | "shell"
-//     | "shorthand"
-//     | "sql"
-//     | "stylus"
-//     | "swift"
-//     | "tcl"
-//     | "textile"
-//     | "toml"
-//     | "tsx"
-//     | "typescript"
-//     | "vb"
-//     | "vhdl"
-//     | "vim"
-//     | "visualbasic"
-//     | "wasm"
-//     | "wiki"
-//     | "yaml";
+export type AuthData = { username: string; password: string };
