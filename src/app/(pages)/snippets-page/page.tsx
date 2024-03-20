@@ -26,6 +26,7 @@ const SnippetsPage = () => {
     try {
       setLoading(true);
       const resData: RequestSnippetType = await getData(query);
+      console.log("resData: ", resData);
       if (resData.status) {
         setData(resData.snippets);
         setLoading(false);

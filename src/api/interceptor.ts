@@ -17,7 +17,6 @@ axiosInstance.interceptors.request.use(
 // Create an Interceptor for Incoming Response data.
 axiosInstance.interceptors.response.use(
   function (response) {
-    console.log("response: ", response);
     if (response.data.message === "login success") {
       const threeHours = 3 * 60 * 60 * 1000;
       const threeHoursFromNow = new Date(Date.now() + threeHours);
@@ -29,13 +28,11 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   async function (error) {
-    console.log("error: ", error);
     if (
       (error.response.data.message === "Access token expired" || error.response.data.message === "Invalid access token") &&
       error.config &&
       !error.config.isRetry
     ) {
-      console.log("getting access token");
       const data = await getAccessToken(cookie.get("refreshToken"));
       if (data.status) {
         error.config.headers.Authorization = `Bearer: ${cookie.get("accessToken")}`;

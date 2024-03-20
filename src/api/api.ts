@@ -16,7 +16,6 @@ export async function getFavoritesData() {
   const res = await axiosInstance(`${process.env.NEXT_PUBLIC_BASE_URL}/favorites/`, {
     headers: { Authorization: `Bearer ${cookie.get("accessToken")}` },
   });
-  console.log("res: ", res);
   if (res.statusText !== "OK") {
     throw new Error("Failed to get snippets.");
   }
@@ -25,7 +24,6 @@ export async function getFavoritesData() {
 
 export async function loginUser(authData: AuthData) {
   const res = await axiosInstance.post(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/login`, authData);
-  console.log("login res: ", res);
   if (res.statusText !== "OK") {
     throw new Error("Failed to Login");
   }

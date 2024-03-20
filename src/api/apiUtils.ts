@@ -5,7 +5,6 @@ import Cookies from "universal-cookie";
 const cookie = new Cookies(null, { path: "/" });
 
 export const getAccessToken = async (refreshToken: string) => {
-  console.log("refreshToken: ", refreshToken);
   if (!refreshToken) {
     throw new Error("no refreshtoken");
   }
@@ -14,7 +13,6 @@ export const getAccessToken = async (refreshToken: string) => {
     throw new Error("internal server error");
   }
 
-  console.log("resData.data: ", resData.data);
   if (resData.data.message === "Token Refreshed") {
     const threeHours = 3 * 60 * 60 * 1000;
     const threeHoursFromNow = new Date(Date.now() + threeHours);
