@@ -27,11 +27,11 @@ const SnippetsPage = () => {
       setLoading(true);
       const resData: RequestSnippetType = await getData(query);
       console.log("resData: ", resData);
-      if (resData.status) {
-        setData(resData.snippets);
+      if (!resData.status) {
+        setError(true);
         setLoading(false);
       } else {
-        setError(true);
+        setData(resData.snippets);
         setLoading(false);
       }
     } catch (error) {
