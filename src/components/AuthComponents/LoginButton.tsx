@@ -1,13 +1,15 @@
 import { Flex, IconButton, Menu, MenuButton, MenuItem, MenuList, Text } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { BiSolidLogInCircle } from "react-icons/bi";
 import { FaRegUserCircle } from "react-icons/fa";
 import Cookies from "universal-cookie";
 
 const LoginButton = ({ type = "desk" }: { type?: string }) => {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
-  const cookie = new Cookies(null, { path: "/" });
+  const cookie = useMemo(() => {
+    return new Cookies(null, { path: "/" });
+  }, []);
   const navigation = useRouter();
   const handleNavigation = () => {
     if (!loggedIn) {
@@ -31,7 +33,7 @@ const LoginButton = ({ type = "desk" }: { type?: string }) => {
     } else {
       setLoggedIn(false);
     }
-  }, []);
+  }, [cookie]);
   return (
     <Flex>
       {loggedIn ? (

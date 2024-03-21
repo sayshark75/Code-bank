@@ -9,11 +9,13 @@ import TopBar from "@/components/FavoritesComponents/TopBar";
 import Navigation from "@/components/Navigation/Navigation";
 import { Flex } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Cookies from "universal-cookie";
 
 const FavoritesPage = () => {
-  const cookie = new Cookies(null, { path: "/" });
+  const cookie = useMemo(() => {
+    return new Cookies(null, { path: "/" });
+  }, []);
   const navigation = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
@@ -42,7 +44,7 @@ const FavoritesPage = () => {
       return;
     }
     getFavoriteData();
-  }, []);
+  }, [cookie, navigation]);
 
   if (loading) {
     return <CustomLoader />;

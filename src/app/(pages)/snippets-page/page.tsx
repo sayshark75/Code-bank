@@ -40,6 +40,7 @@ const SnippetsPage = () => {
   };
   useEffect(() => {
     getSnippetData(searchQuery);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) {
