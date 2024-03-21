@@ -6,10 +6,6 @@ const cookie = new Cookies(null, { path: "/" });
 
 export async function getData(query: string) {
   const res = await axiosInstance(`${process.env.NEXT_PUBLIC_BASE_URL}/snippets/search?q=${query}`);
-  console.log("res: ", res);
-  if (res.statusText !== "OK") {
-    throw new Error("Failed to get snippets.");
-  }
   return await res.data;
 }
 
@@ -17,17 +13,11 @@ export async function getFavoritesData() {
   const res = await axiosInstance(`${process.env.NEXT_PUBLIC_BASE_URL}/favorites/`, {
     headers: { Authorization: `Bearer ${cookie.get("accessToken")}` },
   });
-  if (res.statusText !== "OK") {
-    throw new Error("Failed to get snippets.");
-  }
   return await res.data;
 }
 
 export async function loginUser(authData: AuthData) {
   const res = await axiosInstance.post(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/login`, authData);
-  if (res.statusText !== "OK") {
-    throw new Error("Failed to Login");
-  }
   return await res.data;
 }
 
@@ -39,9 +29,6 @@ export async function addToFavorites(snippetId: string): Promise<any> {
       headers: { Authorization: `Bearer ${cookie.get("accessToken")}` },
     }
   );
-  if (res.statusText !== "OK") {
-    throw new Error("Failed to save snippet.");
-  }
   return res.data;
 }
 
@@ -53,8 +40,5 @@ export async function removeFromFavorites(snippetId: string): Promise<any> {
       headers: { Authorization: `Bearer ${cookie.get("accessToken")}` },
     }
   );
-  if (res.statusText !== "OK") {
-    throw new Error("Failed to remove snippet.");
-  }
   return res.data;
 }
