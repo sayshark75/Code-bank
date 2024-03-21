@@ -1,12 +1,15 @@
-import { Flex, IconButton, Menu, MenuButton, MenuItem, MenuList, Text } from "@chakra-ui/react";
+import { Flex, IconButton, Menu, MenuButton, MenuItem, MenuList, Text, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useMemo, useState } from "react";
 import { BiSolidLogInCircle } from "react-icons/bi";
 import { FaRegUserCircle } from "react-icons/fa";
 import Cookies from "universal-cookie";
+import jwt from "jsonwebtoken";
 
 const LoginButton = ({ type = "desk" }: { type?: string }) => {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  const [username, setUsername] = useState<string>("User");
+  const toast = useToast();
   const cookie = useMemo(() => {
     return new Cookies(null, { path: "/" });
   }, []);
@@ -17,19 +20,34 @@ const LoginButton = ({ type = "desk" }: { type?: string }) => {
     }
   };
 
+  const handlePath = (path: string) => {
+    navigation.push(path);
+  };
+
   const handleSignOut = () => {
     try {
       cookie.remove("accessToken");
       cookie.remove("refreshToken");
       navigation.replace("login");
-    } catch (error) {
+    } catch (error: any) {
       console.log("error: ", error);
+      toast({
+        title: error.response.data.error.message || "something went wrong",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     }
   };
 
   useEffect(() => {
-    if (cookie.get("accessToken")) {
+    const token = cookie.get("accessToken");
+    if (token) {
       setLoggedIn(true);
+      const data = jwt.decode(token);
+      if (data && typeof data !== "string" && data.username) {
+        setUsername(data.username);
+      }
     } else {
       setLoggedIn(false);
     }
@@ -54,9 +72,14 @@ const LoginButton = ({ type = "desk" }: { type?: string }) => {
           {/* show logout */}
           <MenuList bgColor={"light.300"}>
             <Text textStyle={"p-lg"} mb={5}>
-              Hi! User
+              Hi! {username}
             </Text>
-            <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
+            <MenuItem bgColor={"light.200"} mb={1} letterSpacing={"2px"} onClick={() => handlePath("favorites-page")}>
+              Favorites
+            </MenuItem>
+            <MenuItem bgColor={"light.200"} mb={1} letterSpacing={"2px"} onClick={handleSignOut}>
+              Sign Out
+            </MenuItem>
           </MenuList>
         </Menu>
       ) : (

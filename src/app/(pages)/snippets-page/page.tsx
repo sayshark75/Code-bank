@@ -18,6 +18,8 @@ const SnippetsPage = () => {
   const [data, setData] = useState<SnippetDataType[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
 
+  const toast = useToast();
+
   const handleSearchChange = useDebouncer(async (query: string) => {
     getSnippetData(query);
   }, 500);
@@ -33,8 +35,14 @@ const SnippetsPage = () => {
         setData(resData.snippets);
         setLoading(false);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log("error: ", error);
+      toast({
+        title: error.response.data.error.message || "something went wrong",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     }
   };
   useEffect(() => {

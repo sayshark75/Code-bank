@@ -21,6 +21,11 @@ export async function loginUser(authData: AuthData) {
   return await res.data;
 }
 
+export async function signUpUser(authData: AuthData) {
+  const res = await axiosInstance.post(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/signup`, authData);
+  return await res.data;
+}
+
 export async function addToFavorites(snippetId: string): Promise<any> {
   const res = await axiosInstance.patch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/favorites/add`,

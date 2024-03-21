@@ -7,7 +7,7 @@ import CustomError from "@/components/CustomePrompts/CustomError";
 import CustomLoader from "@/components/CustomePrompts/CustomLoader";
 import TopBar from "@/components/FavoritesComponents/TopBar";
 import Navigation from "@/components/Navigation/Navigation";
-import { Flex } from "@chakra-ui/react";
+import { Flex, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useMemo, useState } from "react";
 import Cookies from "universal-cookie";
@@ -21,6 +21,7 @@ const FavoritesPage = () => {
   const [error, setError] = useState<boolean>(false);
 
   const [data, setData] = useState<SnippetDataType[]>([]);
+  const toast = useToast();
 
   const getFavoriteData = async () => {
     try {
@@ -33,8 +34,14 @@ const FavoritesPage = () => {
         setError(true);
         setLoading(false);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log("error: ", error);
+      toast({
+        title: error.response.data.error.message || "something went wrong",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     }
   };
 
