@@ -6,6 +6,7 @@ const cookie = new Cookies(null, { path: "/" });
 
 export async function getData(query: string) {
   const res = await axiosInstance(`${process.env.NEXT_PUBLIC_BASE_URL}/snippets/search?q=${query}`);
+  console.log("res: ", res);
   if (res.statusText !== "OK") {
     throw new Error("Failed to get snippets.");
   }
