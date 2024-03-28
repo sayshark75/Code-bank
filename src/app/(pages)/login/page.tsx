@@ -38,7 +38,7 @@ const LoginPage = () => {
     } catch (error: any) {
       console.log("error: ", error);
       toast({
-        title: error.response.data.error.message || "something went wrong",
+        title: error.response.data?.error?.message || "Something went wrong!",
         status: "error",
         duration: 3000,
         isClosable: true,
