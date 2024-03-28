@@ -47,7 +47,7 @@ const LoginPage = () => {
   };
 
   const handleBack = () => {
-    navigation.back();
+    navigation.push("/snippets-page");
   };
 
   return (
