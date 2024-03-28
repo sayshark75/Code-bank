@@ -30,19 +30,19 @@ const SnippetsPage = () => {
       const resData: RequestSnippetType = await getData(query);
       if (!resData.status) {
         setError(true);
-        setLoading(false);
       } else {
         setData(resData.snippets);
-        setLoading(false);
       }
     } catch (error: any) {
       console.log("error: ", error);
       toast({
-        title: error.response.data.error.message || "something went wrong",
+        title: error.response.data?.error?.message || "Something went wrong!",
         status: "error",
         duration: 3000,
         isClosable: true,
       });
+    } finally {
+      setLoading(false);
     }
   };
   useEffect(() => {

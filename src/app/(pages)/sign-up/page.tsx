@@ -38,7 +38,7 @@ const SignUpPage = () => {
     } catch (error: any) {
       console.log("error: ", error);
       toast({
-        title: error.response.data.error.message || "something went wrong",
+        title: error.response.data?.error?.message || "Something went wrong!",
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -107,7 +107,7 @@ const SignUpPage = () => {
             Submit
           </Text>
         </Button>
-        <Link href="/sign-up" _hover={{}}>
+        <Link href="/login" _hover={{}}>
           <Text> Already a User? Log in</Text>
         </Link>
       </Flex>
