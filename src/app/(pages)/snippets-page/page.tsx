@@ -30,10 +30,8 @@ const SnippetsPage = () => {
       const resData: RequestSnippetType = await getData(query);
       if (!resData.status) {
         setError(true);
-        setLoading(false);
       } else {
         setData(resData.snippets);
-        setLoading(false);
       }
     } catch (error: any) {
       console.log("error: ", error);
@@ -43,6 +41,8 @@ const SnippetsPage = () => {
         duration: 3000,
         isClosable: true,
       });
+    } finally {
+      setLoading(false);
     }
   };
   useEffect(() => {
