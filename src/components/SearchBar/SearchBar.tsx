@@ -3,7 +3,6 @@ import { Box, Flex, Input } from "@chakra-ui/react";
 import { MdSearch } from "react-icons/md";
 import ThemeChanger from "../ThemeChanger/ThemeChanger";
 import { SearchBarType } from "@/TYPES";
-import LoginButton from "../AuthComponents/LoginButton";
 
 const SearchBar = ({ value = "", onChange = () => {} }: SearchBarType) => {
   return (
@@ -42,7 +41,6 @@ const SearchBar = ({ value = "", onChange = () => {} }: SearchBarType) => {
         </Box>
       </Flex>
       <ThemeChanger />
-      <LoginButton />
     </Flex>
   );
 };

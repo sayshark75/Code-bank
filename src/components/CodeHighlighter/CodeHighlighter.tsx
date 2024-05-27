@@ -108,30 +108,6 @@ const CodeHighlighter: React.FC<CodeHighlighterProps> = ({
           </Text>
 
           <Flex flexWrap={"wrap"} justifyContent={"flex-end"} gap={[1, 4]} alignItems={"center"}>
-            {!isFavorite && (
-              <IconButton
-                aria-label="Save into Favorites"
-                fontSize={["18px", "26px"]}
-                bgColor={"transparent"}
-                border={"1px solid"}
-                borderColor={"light.300"}
-                rounded={"md"}
-                icon={<MdAddCircle />}
-                onClick={() => addSnippetToFavorites(_id)}
-              />
-            )}
-            {isFavorite && (
-              <IconButton
-                aria-label="Save into Favorites"
-                fontSize={["18px", "26px"]}
-                bgColor={"transparent"}
-                border={"1px solid"}
-                borderColor={"light.300"}
-                rounded={"md"}
-                icon={<MdDelete />}
-                onClick={() => removeSnippetFromFavorites(_id)}
-              />
-            )}
             {description && <UsagePopup content={description} />}
             {isCopy ? (
               <IconButton

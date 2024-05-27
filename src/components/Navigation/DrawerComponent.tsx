@@ -3,7 +3,6 @@ import { Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, Dra
 import React from "react";
 import TabLink from "./TabLink";
 import { Link } from "@chakra-ui/next-js";
-import LoginButton from "../AuthComponents/LoginButton";
 
 const DrawerComponent = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   return (
@@ -18,7 +17,6 @@ const DrawerComponent = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
                 Code Bank
               </Text>
             </Link>
-            <LoginButton type="mobile" />
           </Flex>
         </DrawerHeader>
 

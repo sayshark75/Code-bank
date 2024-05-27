@@ -8,9 +8,4 @@ export const sidebarTabs: SideBarTabTypes[] = [
     link: "/snippets-page",
     IconName: FaPager,
   },
-  {
-    title: "Favorites",
-    link: "/favorites-page",
-    IconName: BsHeartFill,
-  },
 ];
