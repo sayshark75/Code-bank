@@ -35,12 +35,16 @@ const SnippetsPage = () => {
       }
     } catch (error: any) {
       console.log("error: ", error);
-      toast({
-        title: error.response.data?.error?.message || "Something went wrong!",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
+      if (!toast.isActive("errorToast")) {
+        toast({
+          title: error.response?.data?.error?.message || "Something went wrong!",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+          id: "errorToast",
+        });
+      }
+      setError(true);
     } finally {
       setLoading(false);
     }

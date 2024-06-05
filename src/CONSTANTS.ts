@@ -1,5 +1,5 @@
 import { SideBarTabTypes } from "./TYPES";
-import { FaPager, FaReact, FaStarOfLife } from "react-icons/fa6";
+import { FaMessage, FaPager, FaReact, FaStarOfLife } from "react-icons/fa6";
 import { MdOutlineGradient } from "react-icons/md";
 import { SiChakraui, SiFramer, SiNextdotjs } from "react-icons/si";
 
@@ -38,5 +38,10 @@ export const sidebarTabs: SideBarTabTypes[] = [
     title: "Chakra UI",
     link: "https://v2.chakra-ui.com/",
     IconName: SiChakraui,
+  },
+  {
+    title: "React Toastify",
+    link: "https://fkhadra.github.io/react-toastify/introduction/",
+    IconName: FaMessage,
   },
 ];
