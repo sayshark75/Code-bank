@@ -1,4 +1,5 @@
 import CustomButton from "@/components/CustomButton/CustomButton";
+import PreFetch from "@/components/PreFetch";
 import ThemeChanger from "@/components/ThemeChanger/ThemeChanger";
 import { Flex, Highlight, Text } from "@chakra-ui/react";
 import { FaArrowRight } from "react-icons/fa";
@@ -27,6 +28,7 @@ export default function Home() {
       <Flex pos={"absolute"} top={4} right={4}>
         <ThemeChanger />
       </Flex>
+      <PreFetch />
     </Flex>
   );
 }
