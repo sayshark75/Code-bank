@@ -24,6 +24,8 @@ We value your contributions to this repository! Help make this resource even bet
 
 **Please note**: We do not currently accept pull requests for code snippet additions. To ensure consistency and quality control, we'll integrate approved contributions ourselves.
 
+### Soon will be added user interactions!...
+
 ### Get Involved
 
 - Report issues or make suggestions through GitHub issues. 📝
