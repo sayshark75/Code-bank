@@ -1,14 +1,18 @@
 "use client";
-import { Box, Flex, Image, Input, Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import logo from "@/assets/icons/icon.svg";
 import { sidebarTabs } from "@/CONSTANTS";
 import TabLink from "./TabLink";
 import { Link } from "@chakra-ui/next-js";
+import { MotionFlex } from "@/libs/motionComponents";
 
 const SideBar = () => {
   return (
-    <Flex
+    <MotionFlex
+      initial={{ x: -100 }}
+      animate={{ x: 0 }}
+      transition={{ duration: 0.5 }}
       minW={"240px"}
       maxW={"240px"}
       bgColor={"light.200"}
@@ -35,12 +39,7 @@ const SideBar = () => {
         >
           <Flex gap={"12px"}>
             <Box>
-              <Image
-                w={"25px"}
-                h={"25px"}
-                src={logo.src}
-                alt={"Free Code snippet bank, Code which is used regularly will be stored here."}
-              />
+              <Image w={"25px"} h={"25px"} src={logo.src} alt={"Free Code snippet bank, Code which is used regularly will be stored here."} />
             </Box>
             <Text textStyle={"p-lg"} color={"dark.200"}>
               Code Bank
@@ -52,9 +51,9 @@ const SideBar = () => {
       {/* Tabs list */}
 
       <Flex w={"100%"} px={"8px"} direction={"column"}>
-        {sidebarTabs.map(({ title, link, IconName }, index) => {
+        {sidebarTabs.map(({ title, link, IconName, target }, index) => {
           return (
-            <TabLink key={`tab-link-key-${index}`} link={link}>
+            <TabLink key={`tab-link-key-${index}`} link={link} target={target}>
               <IconName fontSize={"24px"} style={{ position: "relative", zIndex: 1 }} />{" "}
               <Text pos={"relative"} zIndex={1}>
                 {title}
@@ -63,7 +62,7 @@ const SideBar = () => {
           );
         })}
       </Flex>
-    </Flex>
+    </MotionFlex>
   );
 };
 

@@ -1,15 +1,19 @@
 "use client";
-import { Box, Flex, IconButton, Image, useDisclosure } from "@chakra-ui/react";
+import { Box, IconButton, Image, useDisclosure } from "@chakra-ui/react";
 import React from "react";
 import { MdMenu } from "react-icons/md";
 import logo from "@/assets/icons/icon.svg";
 import DrawerComponent from "./DrawerComponent";
 import { Link } from "@chakra-ui/next-js";
+import { MotionFlex } from "@/libs/motionComponents";
 
 const MobileNavbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Flex
+    <MotionFlex
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
       w={"100%"}
       pos={"fixed"}
       top={"0px"}
@@ -42,7 +46,7 @@ const MobileNavbar = () => {
         </Box>
       </Link>
       <DrawerComponent isOpen={isOpen} onClose={onClose} />
-    </Flex>
+    </MotionFlex>
   );
 };
 

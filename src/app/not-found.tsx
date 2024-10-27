@@ -26,8 +26,7 @@ const NotFound = () => {
         The Page you are looking for, is not found...
       </Text>
       <Flex gap={3}>
-        <CustomButton title="View Snippets" variant="blue-solid" link="/snippets-page"></CustomButton>
-        <CustomButton title="Visit Home" variant="grey-solid" link="/"></CustomButton>
+        <CustomButton title="View Snippets" variant="blue-solid" link="/"></CustomButton>
       </Flex>
     </Flex>
   );

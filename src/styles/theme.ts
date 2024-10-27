@@ -73,6 +73,18 @@ export const theme = extendTheme({
       fontFamily: "mont",
       lineHeight: "28px",
     },
+    "p-md": {
+      fontSize: "16px",
+      fontWeight: 500,
+      fontFamily: "mont",
+      lineHeight: "24px",
+    },
+    "p-sm": {
+      fontSize: "14px",
+      fontWeight: 500,
+      fontFamily: "mont",
+      lineHeight: "20px",
+    },
   },
 
   layerStyles: {

@@ -4,11 +4,11 @@ import { Link } from "@chakra-ui/next-js";
 import { Flex } from "@chakra-ui/react";
 import { usePathname } from "next/navigation";
 
-const TabLink = ({ link, children }: TabLinkTypes) => {
+const TabLink = ({ link, target, children }: TabLinkTypes) => {
   const path = usePathname();
   const isValidPath = link === path;
   return (
-    <Link w={"100%"} href={link} _hover={{}}>
+    <Link w={"100%"} href={link} target={target || "_self"} _hover={{}}>
       <Flex
         w={"100%"}
         py={"12px"}

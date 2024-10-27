@@ -1,4 +1,3 @@
-"use client";
 import { IconButton, useColorMode } from "@chakra-ui/react";
 import React from "react";
 import { MdSunny, MdNightsStay } from "react-icons/md";

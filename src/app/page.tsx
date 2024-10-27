@@ -1,34 +1,20 @@
-import CustomButton from "@/components/CustomButton/CustomButton";
-import PreFetch from "@/components/PreFetch";
-import ThemeChanger from "@/components/ThemeChanger/ThemeChanger";
-import { Flex, Highlight, Text } from "@chakra-ui/react";
-import { FaArrowRight } from "react-icons/fa";
-import { SiGithub } from "react-icons/si";
+import { Flex } from "@chakra-ui/react";
+import { SnippetAPIDataType } from "@/TYPES";
+import SearchSnippet from "@/components/SearchBar/SearchSnippet";
 
-export default function Home() {
+async function fetchSnippetData(query: string = ""): Promise<SnippetAPIDataType[]> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/snippets?q=${query}`);
+  if (!res.ok) throw new Error("Failed to fetch snippet data");
+  const data = await res.json();
+  return data.data;
+}
+
+export default async function Page() {
+  const initialData = await fetchSnippetData();
+
   return (
-    <Flex layerStyle={"screen-flex-col-center"}>
-      <Text as={"h1"} color={"dark.100"} textStyle={"heading-h1-lg"} mb={["16px", "24px"]}>
-        Code
-        <Highlight query={"Bank"} styles={{ color: "primary.100" }}>
-          Bank
-        </Highlight>
-      </Text>
-      <Text as={"h5"} px={"2"}>
-        A Library to easily use pre-configured code snippets tailored to your project needs.
-      </Text>
-      <Flex gap={"16px"} mt={"24px"} w={"100%"} maxW={"600px"} layerStyle={"flex-center"} direction={["column", "row"]}>
-        <CustomButton title="Get Started" variant="blue-solid" link="/snippets-page" target="_self">
-          <FaArrowRight />
-        </CustomButton>
-        <CustomButton title="GitHub" variant="grey-solid" link="https://github.com/sayshark75/code-bank" target="_blank">
-          <SiGithub />
-        </CustomButton>
-      </Flex>
-      <Flex pos={"absolute"} top={4} right={4}>
-        <ThemeChanger />
-      </Flex>
-      <PreFetch />
+    <Flex w="100%" direction="column" pt={["56px", "64px"]}>
+      <SearchSnippet initialData={initialData} />
     </Flex>
   );
 }
