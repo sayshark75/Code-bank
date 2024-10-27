@@ -5,7 +5,7 @@ const AlertBox = ({ isOpen, onClose, content = "" }: { content: string; isOpen: 
     <Modal isOpen={isOpen} onClose={onClose} scrollBehavior={"inside"}>
       <ModalOverlay />
       {/* alert */}
-      <ModalContent bgColor={"light.200"}>
+      <ModalContent color={"dark.300"} bgColor={"light.200"}>
         <ModalHeader>Info</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
