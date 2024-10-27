@@ -3,10 +3,14 @@ import { Box, Flex, Input } from "@chakra-ui/react";
 import { MdSearch } from "react-icons/md";
 import ThemeChanger from "../ThemeChanger/ThemeChanger";
 import { SearchBarType } from "@/TYPES";
+import { MotionFlex } from "@/libs/motionComponents";
 
 const SearchBar = ({ value = "", onChange = () => {} }: SearchBarType) => {
   return (
-    <Flex
+    <MotionFlex
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
       pos={"fixed"}
       top={"0px"}
       right={"0px"}
@@ -41,7 +45,7 @@ const SearchBar = ({ value = "", onChange = () => {} }: SearchBarType) => {
         </Box>
       </Flex>
       <ThemeChanger />
-    </Flex>
+    </MotionFlex>
   );
 };
 

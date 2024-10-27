@@ -3,10 +3,11 @@ import { Box, Flex, IconButton, Text, useColorMode } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark, coy } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { MdContentCopy, MdOutlineCheckCircle, MdCode, MdKeyboard } from "react-icons/md";
+import { MdContentCopy, MdOutlineCheckCircle, MdKeyboard } from "react-icons/md";
 import { CodeHighlighterProps } from "@/TYPES";
 import UsagePopup from "./UsagePopup";
 import { decodeString } from "@/helpers/formatString";
+import { IoCodeSlashOutline } from "react-icons/io5";
 
 const CodeHighlighter: React.FC<CodeHighlighterProps> = ({
   _id = "",
@@ -53,7 +54,8 @@ const CodeHighlighter: React.FC<CodeHighlighterProps> = ({
             {title}{" "}
           </Text>
           <Text as={Flex} alignItems={"center"} gap={2}>
-            <MdCode /> By {author}
+            <IoCodeSlashOutline />
+            By {author}
           </Text>{" "}
           <Text as={Flex} w={"max-content"} alignItems={"center"} gap={2}>
             <MdKeyboard /> language: {language}
