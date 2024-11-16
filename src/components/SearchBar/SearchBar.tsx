@@ -4,6 +4,7 @@ import { MdSearch } from "react-icons/md";
 import ThemeChanger from "../ThemeChanger/ThemeChanger";
 import { SearchBarType } from "@/TYPES";
 import { MotionFlex } from "@/libs/motionComponents";
+import GithubButton from "../CustomButton/GithubButton";
 
 const SearchBar = ({ value = "", onChange = () => {} }: SearchBarType) => {
   return (
@@ -45,6 +46,7 @@ const SearchBar = ({ value = "", onChange = () => {} }: SearchBarType) => {
         </Box>
       </Flex>
       <ThemeChanger />
+      <GithubButton />
     </MotionFlex>
   );
 };

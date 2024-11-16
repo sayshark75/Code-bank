@@ -1,12 +1,12 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 import CodeHighlighter from "@/components/CodeHighlighter/CodeHighlighter";
-import CustomNotFound from "@/components/CustomePrompts/CustomNotFound";
+import CustomNotFound from "@/components/CustomPrompts/CustomNotFound";
 import SearchBar from "@/components/SearchBar/SearchBar";
-import { Box, Flex, Spinner, useToast } from "@chakra-ui/react";
+import { Box, useToast } from "@chakra-ui/react";
 import { SnippetAPIDataType } from "@/TYPES";
 import useDebouncer from "@/hooks/useDebounce";
-import CustomLoader from "../CustomePrompts/CustomLoader";
+import CustomLoader from "../CustomPrompts/CustomLoader";
 
 interface SearchSnippetProps {
   initialData: SnippetAPIDataType[];
@@ -72,7 +72,7 @@ export default function SearchSnippet() {
         }}
       />
       {loading ? (
-        <CustomLoader />
+        <CustomLoader title="Please wait..." />
       ) : error ? (
         <CustomNotFound />
       ) : data && data.length === 0 && searchQuery !== "" ? (

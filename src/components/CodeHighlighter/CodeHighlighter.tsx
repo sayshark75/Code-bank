@@ -2,7 +2,7 @@
 import { Box, Flex, IconButton, Text, useColorMode } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { materialDark, coy } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { materialDark, prism } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { MdContentCopy, MdOutlineCheckCircle, MdKeyboard } from "react-icons/md";
 import { CodeHighlighterProps } from "@/TYPES";
 import UsagePopup from "./UsagePopup";
@@ -91,7 +91,7 @@ const CodeHighlighter: React.FC<CodeHighlighterProps> = ({
       <Box w={"100%"} overflow={"hidden"} fontSize={["12px", "12px", "14px", "16px"]}>
         <Box w={"100%"} minW={"280px"} overflow={"auto"} maxH={"400px"}>
           <Box w={"100%"} minH={"100%"} bgColor={"violet"}>
-            <SyntaxHighlighter showLineNumbers language={language} style={colorMode === "light" ? coy : materialDark}>
+            <SyntaxHighlighter showLineNumbers language={language} style={colorMode === "light" ? prism : materialDark}>
               {decodeString(code)}
             </SyntaxHighlighter>
           </Box>

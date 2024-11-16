@@ -1,11 +1,18 @@
-import dbConnect from "@/libs/mongoose";
-import SnippetsModel from "@/models/SnippetModel";
+import { PrismaClient } from "@prisma/client";
 
+const prisma = new PrismaClient();
 export async function POST(request: Request) {
-  await dbConnect();
   try {
     const body = await request.json();
-    const snippets = await SnippetsModel.find({ title: { $regex: body.query, $options: "i" } });
+
+    const snippets = await prisma.snippets.findMany({
+      where: {
+        title: {
+          contains: body.query,
+          mode: "insensitive",
+        },
+      },
+    });
 
     return Response.json({
       message: "Retrieval of snippets success",
