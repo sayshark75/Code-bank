@@ -63,7 +63,7 @@ const SignUpForm = () => {
   };
 
   useEffect(() => {
-    let id = undefined;
+    let id: NodeJS.Timeout | undefined = undefined;
 
     id = setTimeout(() => {
       setError("");

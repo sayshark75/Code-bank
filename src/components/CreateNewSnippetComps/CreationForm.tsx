@@ -72,7 +72,7 @@ const CreationForm = () => {
   };
 
   useEffect(() => {
-    let id = undefined;
+    let id: NodeJS.Timeout | undefined = undefined;
     if (progress.error) {
       id = setTimeout(() => {
         setProgress({ loading: false, success: false, error: "" });

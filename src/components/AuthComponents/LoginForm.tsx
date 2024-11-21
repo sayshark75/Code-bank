@@ -63,7 +63,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (error) {
-      let id = undefined;
+      let id: NodeJS.Timeout | undefined = undefined;
 
       id = setTimeout(() => {
         setError("");

@@ -6,7 +6,7 @@ const RedirectWrapper = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
 
   React.useEffect(() => {
-    let id = undefined;
+    let id: NodeJS.Timeout | undefined = undefined;
 
     id = setTimeout(() => {
       router.push("/snippets");
