@@ -1,44 +1,85 @@
-## 👨‍💻 Code Snippet Repository
 
-Welcome to our code snippet repository! Here, you'll find a treasure trove of reusable code snippets to turbocharge your development process. Say goodbye to repetitive tasks and hello to efficiency! 🚀
+## 🌟 Code Bank
 
-### Features
+- A powerful and intuitive platform to manage, search, and favorite code snippets efficiently! 🚀 Perfect for developers who love to stay organized and productive.
 
-- **Powerful search**: Quickly find what you need with lightning-fast keyword search. ⚡
-- **Clean and intuitive interface**: Browse and view snippets effortlessly with our user-friendly interface. ✨
-- **Different language support**: All snippets which are written in different language, welcome 🤗
+### 🎯 Features
+   - 🔍 Search Snippets: Find your desired code snippets easily with case-insensitive search functionality.
+   - ❤️ Favorite Snippets: Mark your favorite snippets for quick access.
+   - ✏️ User Contributions: Create, edit, and manage your code snippets.
+   - 👥 Collaborative Features: Comment on and like snippets created by others.
+   - 🌗 Dark/Light Mode: Seamless theme switching with Chakra UI for a personalized experience.
 
-### Contribution
+## 🛠️ Tech Stack
+### Frontend:
+- ⚛️ React + Next.js (App Router)
+- 💅 Chakra UI (Responsive and Accessible UI)
+- 🎞️ Framer Motion (Smooth animations)
+- 🧾 TypeScript (Strongly-typed development)
+### Backend:
+- 🔄 Prisma ORM (Type-safe database queries)
+- 🛢️ MongoDB (Flexible and scalable data storage)
+- 🔒 BCrypt (Password encryprion and verification)
+- 🔩 Next.Js (Inbuilt API routing)
 
-We value your contributions to this repository! Help make this resource even better by sharing your valuable code snippets with the community. Here's how you can contribute:
+## 🚀 Usage Guide
 
-1. **Create an issue**: Describe the code snippet you'd like to add, including a clear explanation of its functionality and usage. Be sure to include:
+### 1️⃣ Clone the Repository
+```
+git clone https://github.com/sayshark75/Code-bank.git
+cd ./Code-bank
+```
+### 2️⃣ Install Dependencies
+```
+yarn
+```
+### 3️⃣ Set Environment Variables
+- Create a .env file in the root directory and add the following variables:
+```
+MONGODB_URI=<your-database-url>
+NEXTAUTH_SECRET=<your-nextauth-secret>
+NEXT_PUBLIC_API_BASE_URL=<your-app-url>
+```
+### 4️⃣ Run the Development Server
+```
+yarn dev
+```
+- Visit http://localhost:3000 in your browser to view the app.
 
-   - **Title**: Briefly describe the snippet (e.g., "Efficient string formatting in TypeScript").
-   - **Description**: Explain what the code does and how to use it.
-   - **Code snippet**: Paste the code itself (formatted using code blocks).
+## ✨ Features in Development
+- 🗂️ Snippet Categories: Organize snippets into folders or tags.
+- 🔑 Snippet Sharing: Enable users to share their snippets publicly or within a team.
+- 📊 Usage Analytics: Provide insights on snippet usage (e.g., most liked, most favorited).
+- 🌍 Localization: Support multiple languages for global accessibility.
 
-2. **Review process**: We'll review your submitted code snippet to ensure it meets our quality standards for clarity, efficiency, and best practices.
+### 👨‍💻 Contribution Guide
+- We love contributions! Follow these steps to get started:
 
-3. **Inclusion**: If your code snippet is approved, we'll add it to the repository and credit you as the contributor.
+- Fork the Repository: Click on the "Fork" button on the top-right of this page.
 
-**Please note**: We do not currently accept pull requests for code snippet additions. To ensure consistency and quality control, we'll integrate approved contributions ourselves.
+- Clone Your Fork
+```
+git clone https://github.com/sayshark75/Code-bank.git
+cd ./Code-bank
+```
+- Create a Branch
+```
+git checkout -b feature/your-feature-name
+```
+- Add an Commit Your Changes
+```
+git add .
+git commit -m "Add your meaningful commit message here"
+```
+- Push and Create a PR
+```
+git push origin feature/your-feature-name
+```
+- Go to the original repository and open a Pull Request (PR).
 
-### Soon will be added user interactions!...
+## 📜 License
+- This project is licensed under the MIT License.
+- Patented on ORCID: https://orcid.org/0009-0009-4148-7031
 
-### Get Involved
-
-- Report issues or make suggestions through GitHub issues. 📝
-- Follow the project to stay updated on new additions and improvements.
-
-### Spread the Word
-
-Help us spread the word about this valuable resource! Share it with your friends, colleagues, and fellow developers. Let's build a thriving community of code enthusiasts! 🌟
-
-### Happy Coding!
-
-Thank you for contributing to this community resource of reusable code snippets! 🙌 Let's make coding more enjoyable and productive together. Happy coding! 💻
-
-### License
-
-This project is licensed under the MIT License.
+## 💬 Feedback
+- Feel free to submit any issues or feature requests in the Issues Section. Your feedback is highly appreciated! 🙌
