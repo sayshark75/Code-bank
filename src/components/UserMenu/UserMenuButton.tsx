@@ -60,7 +60,7 @@ const UserMenuButton = () => {
         >
           Favorite Snippets
         </MenuItem>
-        <MenuItem
+        {/* <MenuItem
           bgColor={"light.100"}
           _hover={{ bgColor: "light.200" }}
           color={"dark.100"}
@@ -68,7 +68,7 @@ const UserMenuButton = () => {
           fontSize={"12px"}
         >
           Stale Snippets
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem
           _hover={{ bgColor: "light.200" }}
           bgColor={"light.100"}
