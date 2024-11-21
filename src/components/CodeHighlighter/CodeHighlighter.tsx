@@ -1,91 +1,117 @@
 "use client";
-import { Box, Flex, IconButton, Text, useColorMode } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import { Box, Flex, Text, useColorMode } from "@chakra-ui/react";
+import React from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark, prism } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { MdContentCopy, MdOutlineCheckCircle, MdKeyboard } from "react-icons/md";
-import { CodeHighlighterProps } from "@/TYPES";
+import { MdKeyboard, MdOutlineHotelClass, MdOutlineThumbDown, MdOutlineThumbUp, MdPerson } from "react-icons/md";
 import UsagePopup from "./UsagePopup";
 import { decodeString } from "@/helpers/formatString";
-import { IoCodeSlashOutline } from "react-icons/io5";
+import CopyCodeButton from "./CopyButton";
+import FavoriteCodeButton from "./FavoriteCodeButton";
+import { favoriteSnippet } from "@prisma/client";
+import { FaRegMessage } from "react-icons/fa6";
 
-const CodeHighlighter: React.FC<CodeHighlighterProps> = ({
-  _id = "",
-  title = "",
-  author = "SayShark",
-  code = "",
-  language = "jsx",
-  description = "",
-}) => {
+const CodeHighlighter: React.FC<{
+  id: string;
+  language: string;
+  author: string;
+  description: string;
+  version: string;
+  code: string;
+  title: string;
+  favorites: favoriteSnippet[];
+}> = ({ version = "1.0.0", id = "", favorites, title = "", author = "SayShark", code = "", language = "jsx", description = "" }) => {
   const { colorMode } = useColorMode();
-  const [isCopy, setIsCopy] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (isCopy) {
-      window.navigator.clipboard.writeText(decodeString(code));
-      setTimeout(() => {
-        setIsCopy(false);
-      }, 2000);
-    }
-  }, [code, isCopy]);
 
   return (
-    <Box w={"100%"} p={[2, 8]} bgColor={"light.100"} border={"1px solid"} borderColor={"light.300"} rounded={"lg"} px={3}>
+    <Box w={"100%"} mt={1} p={[2, 8]} bgColor={"light.100"} border={"1px solid"} borderColor={"light.300"} rounded={"lg"} px={3}>
       <Flex
         w={"100%"}
         justifyContent={"space-between"}
         alignItems={"center"}
         borderBottom={"1px solid"}
         borderBottomColor={"light.300"}
-        p={2}
-        gap={2}
+        p={{ base: 0, md: 2 }}
+        gap={{ base: 0, md: 2 }}
       >
-        <Text
-          as={Flex}
+        <Flex
           ml={4}
-          direction={["column", "column", "row"]}
+          w={"100%"}
+          flex={2}
+          direction={"row"}
           justifyContent={"flex-start"}
-          alignItems={["flex-start", "flex-start", "center"]}
+          alignItems={["flex-start", "flex-start", "flex-end"]}
           gap={[1, 2]}
-          fontSize={["12px", "12px", "18px"]}
+          wrap={"wrap"}
+          fontSize={["12px", "12px", "16px"]}
           textTransform={"capitalize"}
         >
-          <Text as={Flex} w={"max-content"} alignItems={"center"} gap={2}>
-            {title}{" "}
-          </Text>
-          <Text as={Flex} alignItems={"center"} gap={2}>
-            <IoCodeSlashOutline />
-            By {author}
-          </Text>{" "}
-          <Text as={Flex} w={"max-content"} alignItems={"center"} gap={2}>
-            <MdKeyboard /> language: {language}
-          </Text>
-        </Text>
+          <Flex
+            title="Snippet title"
+            fontSize={"12px"}
+            bgColor={"light.200"}
+            lineHeight={"100%"}
+            border={"1px solid"}
+            borderColor={"light.300"}
+            p={1}
+            px={2}
+            rounded={"md"}
+            alignItems={"center"}
+            gap={2}
+          >
+            <MdOutlineHotelClass />
+            {title}
+          </Flex>
+          <Flex
+            title="Creator's name"
+            fontSize={"12px"}
+            bgColor={"light.200"}
+            lineHeight={"100%"}
+            border={"1px solid"}
+            borderColor={"light.300"}
+            p={1}
+            px={2}
+            rounded={"md"}
+            alignItems={"center"}
+            gap={2}
+          >
+            <MdPerson />
+            {author}
+          </Flex>{" "}
+          <Flex
+            title="Language used"
+            fontSize={"12px"}
+            bgColor={"light.200"}
+            lineHeight={"100%"}
+            border={"1px solid"}
+            borderColor={"light.300"}
+            p={1}
+            px={2}
+            rounded={"md"}
+            alignItems={"center"}
+            gap={2}
+          >
+            <MdKeyboard /> {language}
+          </Flex>
+          <Flex
+            title="Snippet Version"
+            fontSize={"12px"}
+            bgColor={"light.200"}
+            lineHeight={"100%"}
+            border={"1px solid"}
+            borderColor={"light.300"}
+            p={1}
+            px={2}
+            rounded={"md"}
+          >
+            V{version}
+          </Flex>
+        </Flex>
 
-        <Flex flexWrap={"wrap"} justifyContent={"flex-end"} gap={[1, 4]} alignItems={"center"}>
+        <Flex flex={1} flexWrap={"wrap"} w={"100%"} justifyContent={"flex-end"} gap={[1, 4]} alignItems={"center"}>
           {description && <UsagePopup content={description} />}
-          {isCopy ? (
-            <IconButton
-              fontSize={"16px"}
-              bgColor={"transparent"}
-              border={"1px solid"}
-              borderColor={"light.300"}
-              rounded={"md"}
-              icon={<MdOutlineCheckCircle />}
-              aria-label="Copy The Code"
-            />
-          ) : (
-            <IconButton
-              fontSize={"16px"}
-              bgColor={"transparent"}
-              border={"1px solid"}
-              borderColor={"light.300"}
-              rounded={"md"}
-              icon={<MdContentCopy />}
-              onClick={() => setIsCopy(true)}
-              aria-label="Copy The Code"
-            />
-          )}
+          <CopyCodeButton code={code} />
+          <FavoriteCodeButton favorites={favorites} snippetId={id} />
         </Flex>
       </Flex>
       <Box w={"100%"} overflow={"hidden"} fontSize={["12px", "12px", "14px", "16px"]}>
@@ -97,6 +123,16 @@ const CodeHighlighter: React.FC<CodeHighlighterProps> = ({
           </Box>
         </Box>
       </Box>
+      {/* <Flex w={"100%"} justify={"space-between"} align={"center"}>
+        <Flex align={"center"} gap={2}>
+          <MdOutlineThumbUp />
+          <Text>0</Text>
+          <MdOutlineThumbDown /> <Text>0</Text>
+        </Flex>
+        <Flex>
+          <FaRegMessage />
+        </Flex>
+      </Flex> */}
     </Box>
   );
 };

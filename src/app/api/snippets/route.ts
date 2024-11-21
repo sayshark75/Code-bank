@@ -4,13 +4,27 @@ const prisma = new PrismaClient();
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+    const { query, isFavorite, creatorId } = body;
 
-    const snippets = await prisma.snippets.findMany({
+    const snippets = await prisma.codeSnippet.findMany({
       where: {
         title: {
-          contains: body.query,
+          contains: query,
           mode: "insensitive",
         },
+        ...(isFavorite === "true" && {
+          favorites: {
+            some: {
+              creatorId,
+            }, // Adjust condition if necessary to match your schema
+          },
+        }),
+      },
+      include: {
+        comments: true,
+        creator: true,
+        favorites: true,
+        likes: true,
       },
     });
 
@@ -24,6 +38,7 @@ export async function POST(request: Request) {
       {
         message: "Internal Server Error",
         success: false,
+        data: [],
         error,
       },
       { status: 400 }

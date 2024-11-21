@@ -1,6 +1,10 @@
-import { ReactNode } from "react";
+import { creator, favoriteSnippet } from "@prisma/client";
 import { IconType } from "react-icons";
 
+export interface WindowSize {
+  width: number;
+  height: number;
+}
 export type LinkType = {
   title: string;
   link: string;
@@ -9,33 +13,13 @@ export type LinkType = {
 
 export type SideBarTabTypes = LinkType & { IconName: IconType };
 
-export type TabLinkTypes = { link: string; target?: string; children: ReactNode };
-
-export interface WindowSize {
-  width: number;
-  height: number;
-}
-
-type PureSnippetType = { code: string; tags: string[]; title: string; author: string; language: string; description: string; deleted: boolean };
-
-export type SnippetAPIDataType = PureSnippetType & {
-  _id: string;
-};
-
-export interface CodeHighlighterProps {
-  _id: string;
-  language?: string;
-  author: string;
+export type CodeSnippetType = {
+  title: string;
   description: string;
   code: string;
-  title: string;
-}
-
-export type SearchBarType = {
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  id: string;
+  creator: creator;
+  favorites: favoriteSnippet[];
+  language: string;
+  version: string;
 };
-
-export type RequestSnippetType = { message: string; snippets: SnippetAPIDataType[]; status: boolean };
-
-export type AuthData = { username: string; password: string };

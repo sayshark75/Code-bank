@@ -6,7 +6,7 @@ import { SiChakraui, SiFramer, SiNextdotjs } from "react-icons/si";
 export const sidebarTabs: SideBarTabTypes[] = [
   {
     title: "Snippets",
-    link: "/",
+    link: "/snippets",
     IconName: FaPager,
   },
   {

@@ -42,6 +42,7 @@ export const theme = extendTheme({
         100: { default: "#1D1D1D", _dark: "#fff" },
         200: { default: "#2B2B2B", _dark: "#FCFCFC" },
         300: { default: "#3C3C3C", _dark: "#DFDFDF" },
+        400: { default: "#6D6D6D", _dark: "#BFBFBF" },
       },
       light: {
         100: { _dark: "#1D1D1D", default: "#eee" },

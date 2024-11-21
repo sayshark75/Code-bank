@@ -2,7 +2,6 @@
 import CustomButton from "@/components/CustomButton/CustomButton";
 import { Flex, Text } from "@chakra-ui/react";
 import React from "react";
-import { MdOutlineCodeOff } from "react-icons/md";
 
 const NotFound = () => {
   return (

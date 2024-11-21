@@ -1,5 +1,6 @@
 "use client";
-import { Badge, Box, Flex, Text } from "@chakra-ui/react";
+import GithubButton from "@/components/CustomButton/GithubButton";
+import { Badge, Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from "@chakra-ui/react";
 import { useEffect } from "react";
 
 const ErrorPage = ({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) => {
@@ -10,6 +11,7 @@ const ErrorPage = ({ error, reset }: { error: Error & { digest?: string }; reset
   return (
     <Flex
       bgColor={"light.200"}
+      color={"dark.100"}
       w={"100%"}
       pos={"absolute"}
       top={"0px"}
@@ -27,12 +29,25 @@ const ErrorPage = ({ error, reset }: { error: Error & { digest?: string }; reset
       <Text as={"p"} color={"dark.200"} textStyle={"p-md"}>
         Something went wrong...
       </Text>
-      <Box w={"30%"} pos={"relative"} border={"1px solid #aaa"} textStyle={"p-sm"} rounded={"lg"} p={2} pt={5}>
-        <Badge variant={"solid"} colorScheme={"green"} pos={"absolute"} top={"-10px"} left={"10px"}>
-          Dev info:
-        </Badge>
-        {error.message}
-      </Box>
+      <Tabs w={["100%", "50%"]} border={"1px solid"} borderColor={"light.100"} rounded={"lg"}>
+        <TabList bgColor={"light.100"}>
+          <Tab>Developer Info</Tab>
+          <Tab>Error Stack</Tab>
+        </TabList>
+
+        <TabPanels bgColor={"light.300"}>
+          <TabPanel h={"300px"} overflow={"auto"}>
+            {error.message}
+          </TabPanel>
+          <TabPanel h={"300px"} overflow={"auto"}>
+            {error.stack}
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+      <Flex justify={"center"} align={"center"}>
+        <Text>Visit GitHub to raise/resolve this issues:</Text>
+        <GithubButton />
+      </Flex>{" "}
     </Flex>
   );
 };

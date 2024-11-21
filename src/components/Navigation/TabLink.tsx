@@ -1,10 +1,10 @@
 "use client";
-import { TabLinkTypes } from "@/TYPES";
 import { Link } from "@chakra-ui/next-js";
 import { Flex } from "@chakra-ui/react";
 import { usePathname } from "next/navigation";
+import { ReactNode } from "react";
 
-const TabLink = ({ link, target, children }: TabLinkTypes) => {
+const TabLink = ({ link, target, children }: { link: string; target?: string; children: ReactNode }) => {
   const path = usePathname();
   const isValidPath = link === path;
   return (
