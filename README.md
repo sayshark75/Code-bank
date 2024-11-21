@@ -40,7 +40,11 @@ MONGODB_URI=<your-database-url>
 NEXTAUTH_SECRET=<your-nextauth-secret>
 NEXT_PUBLIC_API_BASE_URL=<your-app-url>
 ```
-### 4️⃣ Run the Development Server
+### 4️⃣ Generate Prisma Types
+```
+npx prisma generate
+```
+### 5️⃣ Run the Development Server
 ```
 yarn dev
 ```
