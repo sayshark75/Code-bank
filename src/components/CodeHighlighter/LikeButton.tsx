@@ -13,7 +13,7 @@ const LikeButton = ({ snippetId, snippetLikes }: { snippetLikes: like[]; snippet
   useEffect(() => {
     const initialLikeStatus = snippetLikes.some((like) => like.creatorId === data?.user.id && like.snippetId === snippetId);
     setIsLiked(initialLikeStatus);
-    setLikeCount(snippetLikes.length);
+    setLikeCount(snippetLikes.length >= 0 ? snippetLikes.length : 0);
   }, [snippetId, snippetLikes, data?.user.id]);
 
   const handleLikeClick = async () => {
