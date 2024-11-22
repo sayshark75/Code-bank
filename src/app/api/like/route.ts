@@ -1,1 +1,5 @@
-export async function GET(request: Request) {}
+import { NextRequest, NextResponse } from "next/server";
+
+export async function GET(req: NextRequest) {
+  return NextResponse.json({ message: "Like API Start Point" });
+}
