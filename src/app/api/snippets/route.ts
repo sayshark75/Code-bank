@@ -26,6 +26,9 @@ export async function POST(request: Request) {
         favorites: true,
         likes: true,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
 
     return Response.json({

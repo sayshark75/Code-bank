@@ -19,8 +19,6 @@ export default function SnippetContainer() {
   const [searchQuery, setSearchQuery] = useState("");
   const { data } = useSession();
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const toast = useToast();
   const params = useSearchParams();
   const isMobile = useBreakpointValue({ base: true, md: false });
 
@@ -30,34 +28,20 @@ export default function SnippetContainer() {
 
   const getSnippetData = useCallback(
     async (query: string, isFavorite: string) => {
-      try {
-        setLoading(true);
-        const res = await fetch(`/api/snippets`, {
-          method: "POST",
-          body: JSON.stringify({ query, isFavorite, creatorId: data?.user.id }),
-          headers: {
-            "Content-Type": "Application/json",
-          },
-        });
-        const responseData = await res.json();
-        setSnippetData(responseData.data);
-      } catch (error: any) {
-        if (!toast.isActive("errorToast")) {
-          toast({
-            title: "Error fetching snippets",
-            description: "Please check your connection or API status.",
-            status: "error",
-            duration: 3000,
-            isClosable: true,
-            id: "errorToast",
-          });
-        }
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
+      setLoading(true);
+      const res = await fetch(`/api/snippets`, {
+        method: "POST",
+        body: JSON.stringify({ query, isFavorite, creatorId: data?.user.id }),
+        headers: {
+          "Content-Type": "Application/json",
+        },
+      });
+      const responseData = await res.json();
+      setSnippetData(responseData.data);
+
+      setLoading(false);
     },
-    [toast, data?.user.id]
+    [data?.user.id]
   );
 
   useEffect(() => {
@@ -95,8 +79,6 @@ export default function SnippetContainer() {
       </MotionFlex>
       {loading ? (
         <CustomLoader title="Please wait..." />
-      ) : error ? (
-        <CustomNotFound title="Please check your connection or API status." />
       ) : snippetData.length === 0 ? (
         <CustomNotFound title={`Currently there are no snippets at this moment! \n — or — \n Contribute on our GitHub page`} />
       ) : snippetData.length === 0 && searchQuery.length > 0 ? (
@@ -113,6 +95,7 @@ export default function SnippetContainer() {
             language={snippet.language}
             id={snippet.id}
             version={snippet.version}
+            snippetLikes={snippet.likes}
           />
         ))
       )}

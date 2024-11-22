@@ -29,46 +29,34 @@ const FavoriteCodeButton = ({ favorites, snippetId }: { snippetId: string; favor
       return;
     }
 
-    try {
-      const res = await fetch(`/api/snippets/favorite`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          favoriteId: favorites?.[0]?.id || null, // Pass the favorite ID if it exists
-          creatorId: data.user.id, // Current user ID
-          snippetId, // Snippet ID
-        }),
-      });
+    const res = await fetch(`/api/snippets/favorite`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        favoriteId: favorites?.[0]?.id || null, // Pass the favorite ID if it exists
+        creatorId: data.user.id, // Current user ID
+        snippetId, // Snippet ID
+      }),
+    });
 
-      const resData = await res.json();
+    const resData = await res.json();
 
-      if (resData.status) {
-        // Optimistically update the state
-        setIsFavorite((prev) => !prev);
-      }
-
-      toast({
-        title: resData.status ? "Success" : "Error",
-        description: resData.message,
-        status: resData.status ? "success" : "error",
-        duration: 3000,
-        isClosable: true,
-        position: "bottom",
-      });
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Something went wrong. Please try again.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position: "bottom",
-      });
-    } finally {
-      setLoading(false);
+    if (resData.status) {
+      // Optimistically update the state
+      setIsFavorite((prev) => !prev);
     }
+
+    toast({
+      title: resData.status ? "Success" : "Error",
+      description: resData.message,
+      status: resData.status ? "success" : "error",
+      duration: 3000,
+      isClosable: true,
+      position: "bottom",
+    });
+    setLoading(false);
   };
 
   useEffect(() => {

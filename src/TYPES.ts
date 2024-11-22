@@ -22,4 +22,5 @@ export type CodeSnippetType = {
   favorites: favoriteSnippet[];
   language: string;
   version: string;
+  likes: [];
 };
