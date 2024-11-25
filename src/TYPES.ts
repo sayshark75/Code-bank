@@ -1,4 +1,4 @@
-import { creator, favoriteSnippet } from "@prisma/client";
+import { creator, favoriteSnippet, like } from "@prisma/client";
 import { IconType } from "react-icons";
 
 export interface WindowSize {
@@ -22,5 +22,5 @@ export type CodeSnippetType = {
   favorites: favoriteSnippet[];
   language: string;
   version: string;
-  likes: [];
+  likes: like[];
 };

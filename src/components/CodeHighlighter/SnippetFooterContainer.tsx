@@ -7,7 +7,7 @@ import { like } from "@prisma/client";
 const SnippetFooterContainer = ({ id = "", snippetLikes }: { id: string; snippetLikes: like[] }) => {
   return (
     <Flex w={"100%"} mt={1} justify={"space-between"} align={"center"}>
-      <LikeButton snippetId={id} snippetLikes={snippetLikes} />
+      {/* <LikeButton snippetId={id} snippetLikes={snippetLikes} /> */}
       {/* <Flex>
         <FaRegMessage />
       </Flex> */}

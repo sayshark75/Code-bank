@@ -1,40 +1,32 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient(); // Adjust the import to match your prisma client setup
+const prisma = new PrismaClient();
 
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    const { snippetId, creatorId, isLiked } = body;
+    const { snippetId, creatorId, isLiked } = await req.json();
 
+    // Validate required fields
     if (!snippetId || !creatorId) {
-      return NextResponse.json({ error: "Snippet ID and Creator ID are required." }, { status: 400 });
+      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
     if (isLiked) {
-      // Unlike the snippet (remove the like)
+      // Unlike logic
       await prisma.like.deleteMany({
-        where: {
-          snippetId,
-          creatorId,
-        },
+        where: { snippetId, creatorId },
       });
-
-      return NextResponse.json({ message: "Successfully unliked the snippet." });
     } else {
-      // Like the snippet (add a new like)
+      // Like logic
       await prisma.like.create({
-        data: {
-          snippetId,
-          creatorId,
-        },
+        data: { snippetId, creatorId },
       });
-
-      return NextResponse.json({ message: "Successfully liked the snippet." });
     }
+
+    return NextResponse.json({ message: "Like status updated successfully" }, { status: 200 });
   } catch (error) {
-    console.error("Error in /api/like route:", error);
-    return NextResponse.json({ error: "Something went wrong." }, { status: 500 });
+    console.error("Error updating like status:", error);
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }

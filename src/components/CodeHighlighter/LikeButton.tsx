@@ -6,43 +6,40 @@ import { MdOutlineThumbUp, MdThumbUp } from "react-icons/md";
 
 const LikeButton = ({ snippetId, snippetLikes }: { snippetLikes: like[]; snippetId: string }) => {
   const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(0);
-  const { data } = useSession();
+  const [likeCount, setLikeCount] = useState(snippetLikes.length || 0);
+  const { data: session } = useSession();
 
-  // Fetch the initial like status and count
+  // Determine if the current user has liked the snippet
   useEffect(() => {
-    const initialLikeStatus = snippetLikes.some((like) => like.creatorId === data?.user.id && like.snippetId === snippetId);
-    setIsLiked(initialLikeStatus);
-    setLikeCount(snippetLikes.length >= 0 ? snippetLikes.length : 0);
-  }, [snippetId, snippetLikes, data?.user.id]);
+    if (session?.user?.id) {
+      setIsLiked(snippetLikes.some((like) => like.creatorId === session.user.id));
+      setLikeCount(snippetLikes.length);
+      console.log("snippetLikes: ", snippetLikes);
+    }
+  }, [snippetLikes, session?.user?.id]);
 
   const handleLikeClick = async () => {
-    setIsLiked(!isLiked);
+    const currentState = isLiked; // Store current like state
+    setIsLiked(!currentState);
+    setLikeCount((prev) => prev + (currentState ? -1 : 1)); // Optimistic UI update
+
     try {
       const response = await fetch(`/api/like/snippet`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ snippetId, creatorId: data?.user.id, isLiked }),
+        body: JSON.stringify({ snippetId, creatorId: session?.user?.id, isLiked: !currentState }),
       });
 
       if (!response.ok) {
-        setIsLiked(!isLiked);
-        console.error("Failed to update like status");
-      } else {
-        console.log("Like status updated successfully");
+        throw new Error("Failed to update like status");
       }
     } catch (error) {
-      console.error("Error in handleLikeClick:", error);
+      console.error(error);
+      // Revert state on failure
+      setIsLiked(currentState);
+      setLikeCount((prev) => prev + (currentState ? 1 : -1));
     }
   };
-
-  useEffect(() => {
-    if (isLiked) {
-      setLikeCount((prevCount) => prevCount + 1);
-    } else {
-      setLikeCount((prevCount) => prevCount - 1);
-    }
-  }, [isLiked]);
 
   return (
     <Flex align={"center"} bgColor={"light.200"} rounded={"md"}>
