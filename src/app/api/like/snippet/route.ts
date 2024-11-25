@@ -13,14 +13,14 @@ export async function POST(req: Request) {
     }
 
     if (isLiked) {
-      // Unlike logic
-      await prisma.like.deleteMany({
-        where: { snippetId, creatorId },
-      });
-    } else {
       // Like logic
       await prisma.like.create({
         data: { snippetId, creatorId },
+      });
+    } else {
+      // Unlike logic
+      await prisma.like.deleteMany({
+        where: { snippetId, creatorId },
       });
     }
 

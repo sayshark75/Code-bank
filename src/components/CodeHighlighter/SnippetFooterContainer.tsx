@@ -1,13 +1,12 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import React from "react";
-import { FaRegMessage } from "react-icons/fa6";
 import LikeButton from "./LikeButton";
 import { like } from "@prisma/client";
 
 const SnippetFooterContainer = ({ id = "", snippetLikes }: { id: string; snippetLikes: like[] }) => {
   return (
     <Flex w={"100%"} mt={1} justify={"space-between"} align={"center"}>
-      {/* <LikeButton snippetId={id} snippetLikes={snippetLikes} /> */}
+      <LikeButton snippetId={id} snippetLikes={snippetLikes} />
       {/* <Flex>
         <FaRegMessage />
       </Flex> */}

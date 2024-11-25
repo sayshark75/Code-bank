@@ -6,17 +6,8 @@ import { MdOutlineThumbUp, MdThumbUp } from "react-icons/md";
 
 const LikeButton = ({ snippetId, snippetLikes }: { snippetLikes: like[]; snippetId: string }) => {
   const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(snippetLikes.length || 0);
+  const [likeCount, setLikeCount] = useState(snippetLikes.length);
   const { data: session } = useSession();
-
-  // Determine if the current user has liked the snippet
-  useEffect(() => {
-    if (session?.user?.id) {
-      setIsLiked(snippetLikes.some((like) => like.creatorId === session.user.id));
-      setLikeCount(snippetLikes.length);
-      console.log("snippetLikes: ", snippetLikes);
-    }
-  }, [snippetLikes, session?.user?.id]);
 
   const handleLikeClick = async () => {
     const currentState = isLiked; // Store current like state
@@ -31,6 +22,9 @@ const LikeButton = ({ snippetId, snippetLikes }: { snippetLikes: like[]; snippet
       });
 
       if (!response.ok) {
+        // Revert state on failure
+        setIsLiked(currentState);
+        setLikeCount((prev) => prev + (currentState ? 1 : -1));
         throw new Error("Failed to update like status");
       }
     } catch (error) {
@@ -38,8 +32,17 @@ const LikeButton = ({ snippetId, snippetLikes }: { snippetLikes: like[]; snippet
       // Revert state on failure
       setIsLiked(currentState);
       setLikeCount((prev) => prev + (currentState ? 1 : -1));
+      throw error;
     }
   };
+
+  // Determine if the current user has liked the snippet
+  useEffect(() => {
+    if (session?.user?.id) {
+      setIsLiked(snippetLikes.some((like) => like.creatorId === session.user.id));
+      setLikeCount(snippetLikes.length);
+    }
+  }, [snippetLikes, session?.user?.id]);
 
   return (
     <Flex align={"center"} bgColor={"light.200"} rounded={"md"}>
