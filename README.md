@@ -32,10 +32,12 @@
 - 6️⃣ Keep your favorite snippets, by clicking Favorite button.
 
 ## ✨ Features in Development
-- 🗂️ Snippet Categories: Organize snippets into folders or tags.
-- 🔑 Snippet Sharing: Enable users to share their snippets publicly or within a team.
-- 📊 Usage Analytics: Provide insights on snippet usage (e.g., most liked, most favorited).
-- 🌍 Localization: Support multiple languages for global accessibility.
+- Snippet Categories: Organize snippets into folders or tags.
+- Snippet Sharing: Enable users to share their snippets publicly or within a team.
+- Usage Analytics: Provide insights on snippet usage (e.g., most liked, most favorited).
+- Stale snippets marking, and user contribution to update those.
+- User profile page with necessary details.
+- Comments and Reply features.
 
 ### 👨‍💻 Contribution Guide
 - We love contributions! Follow these steps to get started:
