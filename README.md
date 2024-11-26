@@ -24,31 +24,12 @@
 
 ## 🚀 Usage Guide
 
-### 1️⃣ Clone the Repository
-```
-git clone https://github.com/sayshark75/Code-bank.git
-cd ./Code-bank
-```
-### 2️⃣ Install Dependencies
-```
-yarn
-```
-### 3️⃣ Set Environment Variables
-- Create a .env file in the root directory and add the following variables:
-```
-MONGODB_URI=<your-database-url>
-NEXTAUTH_SECRET=<your-nextauth-secret>
-NEXT_PUBLIC_API_BASE_URL=<your-app-url>
-```
-### 4️⃣ Generate Prisma Types
-```
-npx prisma generate
-```
-### 5️⃣ Run the Development Server
-```
-yarn dev
-```
-- Visit http://localhost:3000 in your browser to view the app.
+- 1️⃣ Open the website.
+- 2️⃣ Create new account or login.
+- 3️⃣ View Snippets or copy them if required.
+- 4️⃣ Create your own snippet.
+- 5️⃣ Like or Comment on Snippets, mention the creator about better approach.
+- 6️⃣ Keep your favorite snippets, by clicking Favorite button.
 
 ## ✨ Features in Development
 - 🗂️ Snippet Categories: Organize snippets into folders or tags.
@@ -70,6 +51,13 @@ cd ./Code-bank
 ```
 git checkout -b feature/your-feature-name
 ```
+- Add a .env file, with this credentials
+```
+MONGODB_URI=<your-database-url>
+NEXTAUTH_SECRET=<your-nextauth-secret>
+NEXT_PUBLIC_API_BASE_URL=<your-app-url>
+```
+- Make your changes/updates.
 - Add an Commit Your Changes
 ```
 git add .
